@@ -5,10 +5,16 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public float tempo;
     public float flapForce = 10f;
     public float maxVelocity = 5f;
-   public GameObject MenuPerdeu;
+    public GameObject MenuPerdeu;
+    public TextMeshProUGUI Pontos;
+    public int pontuacao;
     public Rigidbody rb;
+    public GameObject Tiro;
+    Vector3 pos;
+    
 
     void Start()
     {
@@ -18,11 +24,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Verifica se a barra de espaço foi pressionada para fazer a nave pular
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+
+            // Verifica se a barra de espaço foi pressionada para fazer a nave pular
+            if (Input.GetKeyDown(KeyCode.Space))
         {
             // Adiciona força a nave para fazê-lo voar para cima
             rb.AddForce(Vector3.up * flapForce, ForceMode.Impulse);
+
+            
+            
         }
 
         // Limita a velocidade da nave para que ele não pule muito rápido
@@ -46,9 +57,10 @@ public class PlayerController : MonoBehaviour
         // Verifica se o asteroide colidiu com o personagem
         if (collision.gameObject.CompareTag("rock"))
         {
-            
-            //colocar pontuação aqui
-           
+            pontuacao++;
+            Pontos.text = pontuacao.ToString();
+            Debug.Log(Pontos);
+
         }
     }
 
@@ -63,5 +75,16 @@ public class PlayerController : MonoBehaviour
             Debug.Log("TEste");
 
         }
+    }
+
+    public void Atirar() {
+
+        
+            pos = transform.position;
+            pos.x = 7;
+            pos.z = 10;
+
+            Instantiate(Tiro, pos, Tiro.transform.rotation);
+        
     }
 }
