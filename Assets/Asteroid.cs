@@ -5,6 +5,7 @@ public class Asteroid : MonoBehaviour
 {
     public float speed = 2f; // Velocidade do asteroide
     public int testeTiro = 0;
+    public GameObject explosaoPrefab;
 
     private void Start()
     {
@@ -20,6 +21,9 @@ public class Asteroid : MonoBehaviour
         
         if (testeTiro >= 5)
         {
+            GameObject explosao = GameObject.Instantiate(explosaoPrefab);
+            explosao.transform.position = this.gameObject.transform.position;
+
             Destroy(gameObject);
         }
     }
@@ -30,6 +34,7 @@ public class Asteroid : MonoBehaviour
         {
 
             testeTiro++;
+
             Destroy(collision.gameObject);
             Debug.Log("TEste");
 
