@@ -6,7 +6,8 @@ public class Spawn : MonoBehaviour
 {
     float limite;
     public float tempo;
-    public GameObject Inimigo;
+    public GameObject[] Inimigo;
+    public PlayerController Nave;
     Vector3 pos;
 
     // Start is called before the first frame update
@@ -26,27 +27,18 @@ public class Spawn : MonoBehaviour
             limite = Random.Range(-6.70f, 6.70f);
             pos = transform.position;
             pos.y = limite;
-            Instantiate(Inimigo, pos, Inimigo.transform.rotation);
+            if (Nave.pontuacao < 2)
+            {
+                Instantiate(Inimigo[0], pos, Inimigo[0].transform.rotation);
+            }
+            else 
+            {
+                int aleatorio = Random.Range(0, 2);
+                print(aleatorio);
+                Instantiate(Inimigo[aleatorio], pos, Inimigo[aleatorio].transform.rotation);
+            }
             tempo = 0;
         }
     }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        // Verifica se o asteroide colidiu com o personagem
-        if (collision.gameObject.CompareTag("Finish"))
-        {
-            Destroy(Inimigo);
-            // Termina o jogo
-            // GameManager.Instance.EndGame();
-        }
-    }
-
-
-    // vector3 pos = transform.position.y;
-    //pos = 
-
-    //superior = 6.31
-    //inferior = -6.49
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public GameObject Tiro;
     Vector3 pos;
+    public bool tiroteste=true;
     
 
     void Start()
@@ -24,7 +26,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        if(tiroteste == false)
+        {
+            tempo = tempo += Time.deltaTime;
+            if (tempo > 1)
+            {
+
+                tempo = 0;
+                tiroteste = true;
+            }
+        }
 
             // Verifica se a barra de espaço foi pressionada para fazer a nave pular
             if (Input.GetKeyDown(KeyCode.Space))
@@ -75,16 +86,37 @@ public class PlayerController : MonoBehaviour
             Debug.Log("TEste");
 
         }
+
+        if (collision.gameObject.CompareTag("tiroInimigo"))
+        {
+
+            Time.timeScale = 0;
+            MenuPerdeu.SetActive(true);
+            Debug.Log("TEste");
+
+        }
+
+
     }
 
     public void Atirar() {
 
-        
+        if (tiroteste)
+        {
             pos = transform.position;
             pos.x = 7;
             pos.z = 10;
 
             Instantiate(Tiro, pos, Tiro.transform.rotation);
-        
+
+            tiroteste = false;
+        }
+    }
+
+    public void Reiniciar() 
+    {
+        SceneManager.LoadScene("SampleScene");
+        Time.timeScale = 1;
+        MenuPerdeu.SetActive(false);
     }
 }

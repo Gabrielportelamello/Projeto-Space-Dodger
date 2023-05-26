@@ -1,14 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
 
 public class Asteroid : MonoBehaviour
 {
     public float speed = 2f; // Velocidade do asteroide
     public int testeTiro = 0;
-    public GameObject explosaoPrefab;
+    public PlayerController Nave;
+    public int pontos;
+
 
     private void Start()
     {
+
+        Nave = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         // Configura a velocidade aleatória do asteroide
         //speed = Random.Range(1f, 4f);
     }
@@ -21,9 +26,8 @@ public class Asteroid : MonoBehaviour
         
         if (testeTiro >= 5)
         {
-            GameObject explosao = GameObject.Instantiate(explosaoPrefab);
-            explosao.transform.position = this.gameObject.transform.position;
-
+            Nave.pontuacao+= 5;
+            Nave.Pontos.text = Nave.pontuacao.ToString();
             Destroy(gameObject);
         }
     }
@@ -34,8 +38,8 @@ public class Asteroid : MonoBehaviour
         {
 
             testeTiro++;
-
             Destroy(collision.gameObject);
+           
             Debug.Log("TEste");
 
         }

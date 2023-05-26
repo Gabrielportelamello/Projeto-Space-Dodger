@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2615907601388813192}
   - component: {fileID: 1194713269}
   - component: {fileID: 1675922304536941473}
-  - component: {fileID: -7352873310601912386}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: rock
@@ -115,7 +114,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   testeTiro: 0
-  explosaoPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
 --- !u!65 &1675922304536941473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129,16 +127,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.7241728, y: 50, z: 2.2126558}
   m_Center: {x: 0.17640947, y: -0.024290977, z: -0.29153797}
---- !u!114 &-7352873310601912386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7437889339238721774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4b8c7d88eebb9940b3c4196017b84df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fractured: {fileID: 0}
