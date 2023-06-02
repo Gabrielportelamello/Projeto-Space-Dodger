@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,20 +39,26 @@ public class PlayerController : MonoBehaviour
         }
 
             // Verifica se a barra de espaço foi pressionada para fazer a nave pular
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.touchCount>0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            // Adiciona força a nave para fazê-lo voar para cima
-            rb.AddForce(Vector3.up * flapForce, ForceMode.Impulse);
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) 
+            {
+                // Adiciona força a nave para fazê-lo voar para cima
+                rb.AddForce(Vector3.up * flapForce, ForceMode.Impulse);
+
+                if (rb.velocity.magnitude > maxVelocity)
+                {
+                    rb.velocity = rb.velocity.normalized * maxVelocity;
+                }
+            }
+            
 
             
             
         }
 
         // Limita a velocidade da nave para que ele não pule muito rápido
-        if (rb.velocity.magnitude > maxVelocity)
-        {
-            rb.velocity = rb.velocity.normalized * maxVelocity;
-        }
+        
 
         
 
@@ -78,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Verifica se o asteroide colidiu com o personagem
-        if (collision.gameObject.CompareTag("rock"))
+        if (collision.gameObject.CompareTag("rock") || collision.gameObject.CompareTag("NaveInimiga"))
         {
 
             Time.timeScale = 0;
