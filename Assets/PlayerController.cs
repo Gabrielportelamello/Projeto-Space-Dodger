@@ -122,7 +122,14 @@ public class PlayerController : MonoBehaviour
 
     public void Reiniciar() 
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MenuInicial");
+        Time.timeScale = 1;
+        MenuPerdeu.SetActive(false);
+    }
+
+    public void Placar()
+    {
+        SceneManager.LoadScene("MenuPlacar");
         Time.timeScale = 1;
         MenuPerdeu.SetActive(false);
     }
