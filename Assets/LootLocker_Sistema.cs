@@ -9,8 +9,6 @@ public class LootLocker_Sistema : MonoBehaviour
     public TMP_InputField Nome;
     public TextMeshProUGUI Placar;
     public int ID;
-    int max = 5;
-    public TextMeshProUGUI[] Jogadores;
 
     private void Start()
     {
@@ -31,27 +29,6 @@ public class LootLocker_Sistema : MonoBehaviour
                 Debug.Log("Enviado");
             else
                 Debug.Log("Erro no envio");
-        });
-    }
-
-    public void MostrarPlacar()
-    {
-        LootLockerSDKManager.GetScoreList(ID, max, (response) =>
-         {
-             if (response.success)
-             {
-                 LootLockerLeaderboardMember[] placares = response.items;
-                 for (int i = 0; i < placares.Length; i++)
-                     Jogadores[i].text = placares[i].member_id+ " - " + placares[i].score;
-
-                 //if (placares.Length < max)
-                 //{
-                 //    for (int i = placares.Length; i < max; i++)
-                 //        Jogadores[i].text = (i+1).ToString() + " 0";
-                 //}
-             }
-             else
-                 Debug.Log("Erro na placar");
         });
     }
 }
