@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     public GameObject Tiro;
     Vector3 pos;
     public bool tiroteste=true;
-    
+    private AudioSource audioSource;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         
+
     }
 
     void Update()
@@ -114,6 +117,7 @@ public class PlayerController : MonoBehaviour
             pos.x = 7;
             pos.z = 10;
 
+            audioSource.Play();
             Instantiate(Tiro, pos, Tiro.transform.rotation);
 
             tiroteste = false;

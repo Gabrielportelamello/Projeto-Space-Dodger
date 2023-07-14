@@ -8,11 +8,14 @@ public class NaveInimiga : MonoBehaviour
     public GameObject TiroInimigo;
     public float tempo;
     Vector3 pos;
+    private AudioSource audioSource;
 
     private void Start()
     {
         // Configura a velocidade aleatória do asteroide
         //speed = Random.Range(1f, 4f);
+        audioSource = GetComponent<AudioSource>();
+        
     }
 
     private void Update()
@@ -24,6 +27,7 @@ public class NaveInimiga : MonoBehaviour
        
         if (tempo > 2)
         {
+            audioSource.Play();
             Instantiate(TiroInimigo, pos, TiroInimigo.transform.rotation);
             tempo = 0;
         } 
